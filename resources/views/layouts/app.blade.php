@@ -8,7 +8,7 @@
     </title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class="flex flex-col min-h-screen bg-gray-100">
     @include('layouts.partials.header')
 
     <main class="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
