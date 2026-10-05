@@ -42,14 +42,19 @@ class DealerController extends Controller
         return redirect()->route('dealers.index')->with('success', 'Dealer baru berhasil ditambahkan.');
     }
 
-    public function edit($id)
+    public function show(string $id)
     {
-        $title = 'Astra Report - Edit Dealer';
-        $dealers = Dealer::select('id', 'code', 'name')->get();
+        $title = 'Astra Report - Detail Dealer';
+        $id = intval($id);
+        $dealer = Dealer::find($id);
 
-        return view('dealers.edit', [
+        if(!$dealer) {
+            abort(404, 'Data Dealer Tidak Ditemukan.');
+        }
+
+        return view('dealers.show', [
             'title' => $title,
-            'dealers' => $dealers,
+            'dealer' => $dealer,
         ]);
     }
 }

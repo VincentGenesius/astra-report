@@ -18,7 +18,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="text-[#16213A]">
                 @foreach ($dealers as $dealer)
                     <tr>
                         <td class="px-5 py-3">
@@ -31,7 +31,7 @@
                             {{ $dealer->name }}
                         </td>
                         <td class="py-3">
-                            <a href="#" class="text-green-500 hover:text-green-700">Lihat</a>
+                            <a href="{{ route('dealers.show', ['id' => $dealer->id]) }}" class="text-green-500 hover:text-green-700">Lihat</a>
                             <a href="#" class="text-blue-500 hover:text-blue-700 ml-2">Edit</a>
                             <a href="#" class="text-red-500 hover:text-red-700 ml-2">Hapus</a>
                         </td>
