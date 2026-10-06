@@ -13,7 +13,10 @@
                 Kode Dealer
             </label>
 
-            <input type="text" id="code" name="code" placeholder="Contoh: DLR-AYANI" class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
+            <input value="{{ old('code') }}" type="text" id="code" name="code" placeholder="Contoh: DLR-AYANI" class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
+            @error('code')
+                <span class="py-2 text-red-500">{{ $message }}</span>
+            @enderror
         </div>
 
         <div>
@@ -21,7 +24,10 @@
                 Nama Dealer
             </label>
 
-            <input type="text" id="name" name="name" placeholder="Contoh: Astra Motor Ayani Pontianak" class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
+            <input value="{{ old('name') }}" type="text" id="name" name="name" placeholder="Contoh: Astra Motor Ayani Pontianak" class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
+            @error('name')
+                <span class="py-2 text-red-500">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="flex justify-end">
