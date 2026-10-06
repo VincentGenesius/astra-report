@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Supervisor\DealerController;
+use App\Http\Controllers\Supervisor\DepartmentController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('dealers.')->prefix('dealers')->group(function () {
@@ -11,4 +12,14 @@ Route::name('dealers.')->prefix('dealers')->group(function () {
     Route::get('/{dealer}/edit', [DealerController::class, 'edit'])->name('edit');
     Route::put('/{dealer}', [DealerController::class, 'update'])->name('update');
     Route::delete('/{dealer}', [DealerController::class, 'destroy'])->name('destroy');
+});
+
+Route::name('departments.')->prefix('departments')->group(function () {
+    Route::get('/', [DepartmentController::class, 'index'])->name('index');
+    // Route::get('/create', [DepartmentController::class, 'create'])->name('create');
+    // Route::post('/', [DepartmentController::class, 'store'])->name('store');
+    // Route::get('/{department}', [DepartmentController::class, 'show'])->name('show');
+    // Route::get('/{department}/edit', [DepartmentController::class, 'edit'])->name('edit');
+    // Route::put('/{department}', [DepartmentController::class, 'update'])->name('update');
+    // Route::delete('/{department}', [DepartmentController::class, 'destroy'])->name('destroy');
 });
