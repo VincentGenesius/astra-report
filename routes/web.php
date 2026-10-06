@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Supervisor\AreaController;
 use App\Http\Controllers\Supervisor\DealerController;
 use App\Http\Controllers\Supervisor\DepartmentController;
 use Illuminate\Support\Facades\Route;
@@ -22,4 +23,14 @@ Route::name('departments.')->prefix('departments')->group(function () {
     Route::get('/{department}/edit', [DepartmentController::class, 'edit'])->name('edit');
     Route::put('/{department}', [DepartmentController::class, 'update'])->name('update');
     Route::delete('/{department}', [DepartmentController::class, 'destroy'])->name('destroy');
+});
+
+Route::name('areas.')->prefix('areas')->group(function () {
+    Route::get('/', [AreaController::class, 'index'])->name('index');
+    Route::get('/create', [AreaController::class, 'create'])->name('create');
+    Route::post('/', [AreaController::class, 'store'])->name('store');
+    Route::get('/{area}', [AreaController::class, 'show'])->name('show');
+    Route::get('/{area}/edit', [AreaController::class, 'edit'])->name('edit');
+    Route::put('/{area}', [AreaController::class, 'update'])->name('update');
+    Route::delete('/{area}', [AreaController::class, 'destroy'])->name('destroy');
 });
