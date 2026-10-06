@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Supervisor;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dealer\StoreRequest;
+use App\Http\Requests\Dealer\UpdateRequest;
 use App\Models\Dealer;
 use Illuminate\Http\Request;
 
@@ -22,31 +24,24 @@ class DealerController extends Controller
     public function create()
     {
         $title = 'Astra Report - Tambah Dealer';
-        $dealers = Dealer::select('id', 'code', 'name')->get();
 
         return view('dealers.create', [
             'title' => $title,
-            'dealers' => $dealers,
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $validatedRequests = $request->validate([
-            'code' => ['required', 'string', 'max:50', 'unique:dealers,code'],
-            'name' => ['required', 'string', 'max:50'],
-        ]);
+        $validatedRequests = $request->validated();
 
         Dealer::create($validatedRequests);
 
-        return redirect()->route('dealers.index')->with('success', 'Dealer baru berhasil ditambahkan.');
+        return redirect()->route('dealers.index');
     }
 
-    public function show(string $id)
+    public function show(Dealer $dealer)
     {
         $title = 'Astra Report - Detail Dealer';
-        $id = intval($id);
-        $dealer = Dealer::find($id);
 
         if(!$dealer) {
             abort(404, 'Data Dealer Tidak Ditemukan.');
@@ -56,5 +51,31 @@ class DealerController extends Controller
             'title' => $title,
             'dealer' => $dealer,
         ]);
+    }
+
+    public function edit(Dealer $dealer)
+    {
+        $title = 'Astra Report - Edit Dealer';
+
+        return view('dealers.edit', [
+            'title' => $title,
+            'dealer' => $dealer
+        ]);
+    }
+
+    public function update(Dealer $dealer, UpdateRequest $request)
+    {
+        $validatedRequests = $request->validated();
+
+        $dealer->update($validatedRequests);
+
+        return redirect()->route('dealers.index');
+    }
+
+    public function destroy(Dealer $dealer)
+    {
+        $dealer->delete();
+
+        return redirect()->route('dealers.index');
     }
 }

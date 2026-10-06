@@ -19,7 +19,7 @@
             </thead>
 
             <tbody class="text-[#16213A]">
-                @foreach ($dealers as $dealer)
+                @forelse ($dealers as $dealer)
                     <tr>
                         <td class="px-5 py-3">
                             {{ $loop->iteration }}
@@ -31,12 +31,23 @@
                             {{ $dealer->name }}
                         </td>
                         <td class="py-3">
-                            <a href="{{ route('dealers.show', ['id' => $dealer->id]) }}" class="text-green-500 hover:text-green-700">Lihat</a>
-                            <a href="#" class="text-blue-500 hover:text-blue-700 ml-2">Edit</a>
-                            <a href="#" class="text-red-500 hover:text-red-700 ml-2">Hapus</a>
+                            <div class="flex gap-2">
+                                <a href="{{ route('dealers.show', ['dealer' => $dealer->id]) }}" class="text-green-500 hover:text-green-700">Lihat</a>
+                                <a href="{{ route('dealers.edit', ['dealer' => $dealer->id]) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
+                                <form action="{{ route('dealers.destroy', ['dealer' => $dealer->id]) }}" method="POST" onsubmit="return confirm('Hapus data dealer ini dari daftar?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
-                @endforeach
+
+                @empty
+                <tr>
+                    <td colspan="6" class="text-center p-4">Data Dealer Tidak Tersedia</td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

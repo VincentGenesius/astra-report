@@ -28,7 +28,7 @@
         </div>
 
         <div class="flex justify-end">
-            <a href="#" class="text-gray-500 py-2 px-4 hover:bg-gray-200 rounded-sm transition-all">
+            <a href="{{ route('dealers.edit', ['dealer' => $dealer->id]) }}" class="text-gray-500 py-2 px-4 hover:bg-gray-200 rounded-sm transition-all">
                 Edit
             </a>
 
@@ -36,5 +36,5 @@
                 Kembali
             </a>
         </div>
-    </divmethod=>
+    </div>
 @endsection
