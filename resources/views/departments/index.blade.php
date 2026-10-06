@@ -2,9 +2,9 @@
 @section('title', $title)
 @section('content')
     <div class="flex justify-between items-center">
-        <h1 class="font-bold text-2xl text-[#003366]">Daftar Department</h1>
+        <h1 class="font-bold text-2xl text-[#003366]">Daftar Departemen</h1>
 
-        <a href="{{ route('departments.create') }}" class="bg-[#003366] text-white py-2 px-4 hover:bg-[#014991] rounded-sm transition-all">Tambah Department Baru</a>
+        <a href="{{ route('departments.create') }}" class="bg-[#003366] text-white py-2 px-4 hover:bg-[#014991] rounded-sm transition-all">Tambah Departemen Baru</a>
     </div>
 
     <div class="border border-gray-300 bg-white rounded-sm mt-4">

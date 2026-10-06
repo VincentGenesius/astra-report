@@ -4,7 +4,7 @@
 
         <nav class="gap-8 md:flex">
             <a href="{{ route('dealers.index') }}" class="text-gray-300 hover:text-white transition-all">Dealer</a>
-            <a href="#" class="text-gray-300 hover:text-white transition-all">Department</a>
+            <a href="{{ route('departments.index') }}" class="text-gray-300 hover:text-white transition-all">Departemen</a>
             <a href="#" class="text-gray-300 hover:text-white transition-all">Area</a>
             <a href="#" class="text-gray-300 hover:text-white transition-all">Tugas</a>
             <a href="#" class="text-gray-300 hover:text-white transition-all">Pemeriksaan Tugas</a>

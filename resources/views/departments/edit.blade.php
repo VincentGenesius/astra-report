@@ -2,19 +2,19 @@
 @section('title', $title)
 @section('content')
     <div class="flex justify-between items-center">
-        <h1 class="font-bold text-2xl text-[#003366]">Edit Dealer</h1>
+        <h1 class="font-bold text-2xl text-[#003366]">Edit Departemen</h1>
     </div>
 
-    <form action="{{ route('dealers.update', ['dealer' => $dealer->id]) }}" method="POST" class="space-y-5 border border-gray-300 bg-white p-8 mt-4 rounded-sm">
+    <form action="{{ route('departments.update', ['department' => $department->id]) }}" method="POST" class="space-y-5 border border-gray-300 bg-white p-8 mt-4 rounded-sm">
         @csrf
         @method('PUT')
 
         <div>
             <label for="code" class="mb-2 block text-sm font-semibold uppercase tracking-wider text-[#16213A]">
-                Kode Dealer
+                Kode Departemen
             </label>
 
-            <input type="text" id="code" name="code" placeholder="Contoh: DLR-AYANI" value="{{ old('code', $dealer->code) }}" class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
+            <input type="text" id="code" name="code" placeholder="Contoh: HC3" value="{{ old('code', $department->code) }}" class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
             @error('code')
                 <span class="py-2 text-red-500">{{ $message }}</span>
             @enderror
@@ -22,17 +22,17 @@
 
         <div>
             <label for="name" class="mb-2 block text-sm font-semibold uppercase tracking-wider text-[#16213A]">
-                Nama Dealer
+                Nama Departemen
             </label>
 
-            <input type="text" id="name" name="name" placeholder="Contoh: Astra Motor Ayani Pontianak" value="{{ old('name', $dealer->name) }}" class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
+            <input type="text" id="name" name="name" placeholder="Contoh: Human Capital, Customer Care & Communication" value="{{ old('name', $department->name) }}" class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
             @error('name')
                 <span class="py-2 text-red-500">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="flex justify-end">
-            <a href="{{ route('dealers.index') }}" class="text-gray-500 py-2 px-4 hover:bg-gray-200 rounded-sm transition-all">
+            <a href="{{ route('departments.index') }}" class="text-gray-500 py-2 px-4 hover:bg-gray-200 rounded-sm transition-all">
                 Kembali
             </a>
 
