@@ -9,12 +9,16 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="flex flex-col min-h-screen bg-gray-100">
-    @include('layouts.partials.header')
+    @auth
+        @include('layouts.partials.header')
+    @endauth
 
     <main class="mx-auto w-full max-w-5xl flex-1 px-4 py-10">
         @yield('content')
     </main>
 
-    @include('layouts.partials.footer')
+    @auth
+        @include('layouts.partials.footer') 
+    @endauth
 </body>
 </html>
