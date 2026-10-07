@@ -11,11 +11,11 @@
         <table class="w-full text-left text-sm">
             <thead>
                 <tr class="border-b border-gray-300 uppercase tracking-wider text-gray-500">
-                    <th class="w-14 px-5 py-3 font-semibold">No.</th>
-                    <th class="px-5 py-3 font-semibold">Judul Tugas</th>
-                    <th class="px-5 py-3 font-semibold">Departemen</th>
-                    <th class="px-5 py-3 font-semibold">Area</th>
-                    <th class="px-5 py-3 font-semibold">Pembuat</th>
+                    <th class="px-5 py-3 font-semibold">No.</th>
+                    <th class="py-3 font-semibold">Judul Tugas</th>
+                    <th class="py-3 font-semibold">Departemen</th>
+                    <th class="py-3 font-semibold">Area</th>
+                    <th class="py-3 font-semibold">Pembuat</th>
                     <th class="py-3 font-semibold">Aksi</th>
                 </tr>
             </thead>
@@ -26,14 +26,17 @@
                         <td class="px-5 py-3">
                             {{ $loop->iteration }}
                         </td>
-                        <td class="px-5 py-3">
+                        <td class="py-3">
                             {{ $task->title }}
                         </td>
-                        <td class="px-5 py-3">
+                        <td class="py-3">
                             {{ $task->department->name }}
                         </td>
-                        <td class="px-5 py-3">
+                        <td class="py-3">
                             {{ $task->area->name }}
+                        </td>
+                        <td class="py-3">
+                            {{ $task->creator->name }}
                         </td>
                         <td class="py-3">
                             <div class="flex gap-2">

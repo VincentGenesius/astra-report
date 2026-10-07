@@ -9,11 +9,11 @@
 
         <div class="flex items-center">
             <label class="w-50 text-sm font-semibold uppercase tracking-wider text-[#16213A]">
-                Kode Departemen
+                Judul Tugas
             </label>
 
             <div class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
-                {{ $department->code }}
+                {{ $task->title }}
             </div>
         </div>
 
@@ -23,16 +23,46 @@
             </label>
 
             <div class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
-                {{ $department->name }}
+                {{ $task->department->name }}
+            </div>
+        </div>
+
+        <div class="flex items-center">
+            <label class="w-50 text-sm font-semibold uppercase tracking-wider text-[#16213A]">
+                Nama Area
+            </label>
+
+            <div class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
+                {{ $task->area->name }}
+            </div>
+        </div>
+
+        <div class="flex items-center">
+            <label class="w-50 text-sm font-semibold uppercase tracking-wider text-[#16213A]">
+                Batas Waktu
+            </label>
+
+            <div class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
+                {{ $task->due_at }}
+            </div>
+        </div>
+
+        <div class="flex items-center">
+            <label class="w-50 text-sm font-semibold uppercase tracking-wider text-[#16213A]">
+                Dibuat oleh
+            </label>
+
+            <div class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
+                {{ $task->creator->name }}
             </div>
         </div>
 
         <div class="flex justify-end">
-            <a href="{{ route('departments.edit', ['department' => $department->id]) }}" class="text-gray-500 py-2 px-4 hover:bg-gray-200 rounded-sm transition-all">
+            <a href="{{ route('tasks.edit', ['task' => $task->id]) }}" class="text-gray-500 py-2 px-4 hover:bg-gray-200 rounded-sm transition-all">
                 Edit
             </a>
 
-            <a href="{{ route('departments.index') }}" class="bg-[#003366] text-white py-2 px-4 hover:bg-[#014991] rounded-sm transition-all ml-2">
+            <a href="{{ route('tasks.index') }}" class="bg-[#003366] text-white py-2 px-4 hover:bg-[#014991] rounded-sm transition-all ml-2">
                 Kembali
             </a>
         </div>

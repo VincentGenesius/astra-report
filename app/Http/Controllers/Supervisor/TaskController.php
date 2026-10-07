@@ -13,7 +13,7 @@ class TaskController extends Controller
     public function index()
     {
         $title = 'Astra Report - Daftar Tugas';
-        $tasks = Task::with(['department', 'area', 'creator', 'submissions'])->latest()->get();
+        $tasks = Task::with(['department', 'area', 'creator'])->latest()->get();
 
         return view('tasks.index', [
             'title' => $title,
@@ -49,4 +49,44 @@ class TaskController extends Controller
 
         return redirect()->route('tasks.index');
     }
+
+    public function show(Task $task)
+    {
+        $title = 'Astra Report - Detail Tugas';
+
+        if(!$task) {
+            abort(404, 'Data Tugas Tidak Ditemukan.');
+        }
+
+        return view('tasks.show', [
+            'title' => $title,
+            'task' => $task,
+        ]);
+    }
+
+    // public function edit(Department $department)
+    // {
+    //     $title = 'Astra Report - Edit Departemen';
+
+    //     return view('departments.edit', [
+    //         'title' => $title,
+    //         'department' => $department
+    //     ]);
+    // }
+
+    // public function update(Department $department, UpdateRequest $request)
+    // {
+    //     $validatedRequests = $request->validated();
+
+    //     $department->update($validatedRequests);
+
+    //     return redirect()->route('departments.index');
+    // }
+
+    // public function destroy(Department $department)
+    // {
+    //     $department->delete();
+
+    //     return redirect()->route('departments.index');
+    // }
 }
