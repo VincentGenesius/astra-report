@@ -15,6 +15,7 @@
                     <th class="py-3 font-semibold">Judul Tugas</th>
                     <th class="py-3 font-semibold">Departemen</th>
                     <th class="py-3 font-semibold">Area</th>
+                    <th class="py-3 font-semibold">Batas Waktu</th>
                     <th class="py-3 font-semibold">Pembuat</th>
                     <th class="py-3 font-semibold">Aksi</th>
                 </tr>
@@ -36,9 +37,12 @@
                             {{ $task->area->name }}
                         </td>
                         <td class="py-3">
-                            {{ $task->creator->name }}
+                            {{ $task->due_at }}
                         </td>
                         <td class="py-3">
+                            {{ $task->creator->name }}
+                        </td>
+                        <td class="pr-3 py-3">
                             <div class="flex gap-2">
                                 <a href="{{ route('tasks.show', ['task' => $task->id]) }}" class="text-green-500 hover:text-green-700">Lihat</a>
                                 <a href="{{ route('tasks.edit', ['task' => $task->id]) }}" class="text-blue-500 hover:text-blue-700">Edit</a>

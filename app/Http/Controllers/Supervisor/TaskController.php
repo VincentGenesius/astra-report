@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Supervisor;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Task\StoreRequest;
 use App\Models\Area;
 use App\Models\Department;
 use App\Models\Task;
@@ -34,14 +35,9 @@ class TaskController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $validatedRequests = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'department_id' => ['required', 'exists:departments,id'],
-            'area_id' => ['required', 'exists:areas,id'],
-            'due_at' => ['required', 'date'],
-        ]);
+        $validatedRequests = $request->validated();
 
         $validatedRequests['created_by'] = auth()->id();
 
@@ -64,24 +60,28 @@ class TaskController extends Controller
         ]);
     }
 
-    // public function edit(Department $department)
-    // {
-    //     $title = 'Astra Report - Edit Departemen';
+    public function edit(Task $task)
+    {
+        $title = 'Astra Report - Edit Tugas';
+        $departments = Department::all();
+        $areas = Area::all();
 
-    //     return view('departments.edit', [
-    //         'title' => $title,
-    //         'department' => $department
-    //     ]);
-    // }
+        return view('tasks.edit', [
+            'title' => $title,
+            'task' => $task,
+            'departments' => $departments,
+            'areas' => $areas
+        ]);
+    }
 
-    // public function update(Department $department, UpdateRequest $request)
-    // {
-    //     $validatedRequests = $request->validated();
+    public function update(Task $task, UpdateRequest $request)
+    {
+        $validatedRequests = $request->validated();
 
-    //     $department->update($validatedRequests);
+        $task->update($validatedRequests);
 
-    //     return redirect()->route('departments.index');
-    // }
+        return redirect()->route('tasks.index');
+    }
 
     // public function destroy(Department $department)
     // {
