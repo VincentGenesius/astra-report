@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Dealer\TaskSubmissionController;
 use App\Http\Controllers\Supervisor\AreaController;
 use App\Http\Controllers\Supervisor\DealerController;
 use App\Http\Controllers\Supervisor\DepartmentController;
 use App\Http\Controllers\Supervisor\TaskController;
+use App\Http\Controllers\Supervisor\TaskReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -54,5 +56,16 @@ Route::name('tasks.')->prefix('tasks')->group(function () {
     Route::get('/{task}/edit', [TaskController::class, 'edit'])->name('edit');
     Route::put('/{task}', [TaskController::class, 'update'])->name('update');
     Route::delete('/{task}', [TaskController::class, 'destroy'])->name('destroy');
+});
+
+Route::name('task-submissions.')->prefix('task-submissions')->group(function () {
+    Route::get('/', [TaskSubmissionController::class, 'index'])->name('index');
+    Route::get('/{task}/submit', [TaskSubmissionController::class, 'create'])->name('create');
+    Route::post('/{task}/submit', [TaskSubmissionController::class, 'store'])->name('store');
+});
+
+Route::name('task-reviews.')->prefix('task-reviews')->group(function () {
+    Route::get('/', [TaskReviewController::class, 'index'])->name('index');
+    Route::get('/{taskSubmission}/submit', [TaskReviewController::class, 'create'])->name('create');
 });
 

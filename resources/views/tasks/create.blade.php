@@ -2,77 +2,65 @@
 @section('title', $title)
 @section('content')
     <div class="flex justify-between items-center">
-        <h1 class="font-bold text-2xl text-[#003366]">Tambah Tugas</h1>
+        <h1 class="font-bold text-2xl text-[#003366]">Pengumpulan Tugas</h1>
     </div>
 
-    <form action="{{ route('tasks.store') }}" method="POST" class="space-y-5 border border-gray-300 bg-white p-8 mt-4 rounded-sm">
+    <div class="border border-gray-300 bg-white p-6 mt-4 rounded-sm space-y-3">
+        <h2 class="font-bold text-lg text-[#003366] border-b pb-2">{{ $task->title }}</h2>
+        <div class="grid grid-cols-2 gap-4 text-sm text-[#16213A]">
+            <div>
+                <span class="text-gray-500 block text-xs uppercase font-semibold">Departemen</span>
+                <span class="font-medium">{{ $task->department?->name ?? '-' }}</span>
+            </div>
+            <div>
+                <span class="text-gray-500 block text-xs uppercase font-semibold">Area</span>
+                <span class="font-medium">{{ $task->area?->name ?? '-' }}</span>
+            </div>
+            <div>
+                <span class="text-gray-500 block text-xs uppercase font-semibold">Batas Waktu</span>
+                <span class="font-medium">{{ \Carbon\Carbon::parse($task->due_at)->format('d-m-Y') }}</span>
+            </div>
+        </div>
+        <div>
+            <span class="text-gray-500 block text-xs uppercase font-semibold mt-2">Instruksi Tugas</span>
+            <p class="text-gray-700 text-sm mt-1 bg-[#FCFBF8] border border-[#D9D6CD] p-3 rounded-sm">
+                {{ $task->description ?? 'Tidak ada catatan instruksi.' }}
+            </p>
+        </div>
+    </div>
+
+    <form action="{{ route('task-submissions.store', $task->id) }}" method="POST" class="space-y-5 border border-gray-300 bg-white p-8 mt-4 rounded-sm">
         @csrf
 
         <div>
-            <label for="title" class="mb-2 block text-sm font-semibold uppercase tracking-wider text-[#16213A]">
-                Judul Tugas
+            <label for="google_drive_url" class="mb-2 block text-sm font-semibold uppercase tracking-wider text-[#16213A]">
+                Link Google Drive
             </label>
 
-            <input value="{{ old('title') }}" type="text" id="title" name="title" placeholder="Contoh: Laporan Audit Inventaris Bulanan" class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
-            @error('title')
-                <span class="py-2 text-red-500">{{ $message }}</span>
+            <input value="{{ old('google_drive_url') }}" type="url" id="google_drive_url" name="google_drive_url" placeholder="Contoh: https://drive.google.com/..." required class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
+            @error('google_drive_url')
+                <span class="py-2 text-red-500 block text-sm">{{ $message }}</span>
             @enderror
         </div>
 
         <div>
-            <label for="department_id" class="mb-2 block text-sm font-semibold uppercase tracking-wider text-[#16213A]">
-                Departemen
+            <label for="notes" class="mb-2 block text-sm font-semibold uppercase tracking-wider text-[#16213A]">
+                Catatan (Opsional)
             </label>
 
-            <select name="department_id" id="department_id" class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
-                <option value="">Pilih Departemen</option>
-                @foreach ($departments as $department)
-                    <option value="{{ $department->id }}" {{ old('department_id') == $department->id ? 'selected' : '' }}>
-                        {{ $department->name }}
-                    </option>
-                @endforeach
-            </select>
-            @error('department_id')
-                <span class="py-2 text-red-500">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div>
-            <label for="area_id" class="mb-2 block text-sm font-semibold uppercase tracking-wider text-[#16213A]">
-                Area
-            </label>
-
-            <select name="area_id" id="area_id" class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
-                <option value="">Pilih Area</option>
-                @foreach ($areas as $area)
-                    <option value="{{ $area->id }}" {{ old('area_id') == $area->id ? 'selected' : '' }}>
-                        {{ $area->name }}
-                    </option>
-                @endforeach
-            </select>
-            @error('area_id')
-                <span class="py-2 text-red-500">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div>
-            <label for="due_at" class="mb-2 block text-sm font-semibold uppercase tracking-wider text-[#16213A]">
-                Batas Waktu
-            </label>
-
-            <input value="{{ old('due_at') }}" type="date" id="due_at" name="due_at" placeholder="Contoh: 24-11-2026" class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">
-            @error('due_at')
-                <span class="py-2 text-red-500">{{ $message }}</span>
+            <textarea id="notes" name="notes" rows="3" placeholder="Tambahkan catatan atau pesan untuk supervisor..." class="w-full border border-[#D9D6CD] bg-[#FCFBF8] p-3 text-sm focus:border-[#003366] focus:outline-none rounded-sm">{{ old('notes') }}</textarea>
+            @error('notes')
+                <span class="py-2 text-red-500 block text-sm">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="flex justify-end">
-            <a href="{{ route('tasks.index') }}" class="text-gray-500 py-2 px-4 hover:bg-gray-200 rounded-sm transition-all">
+            <a href="{{ route('dealer.submissions.index') }}" class="text-gray-500 py-2 px-4 hover:bg-gray-200 rounded-sm transition-all text-sm flex items-center">
                 Kembali
             </a>
 
-            <button type="submit" class="bg-[#003366] text-white py-2 px-4 hover:bg-[#014991] rounded-sm transition-all ml-2">
-                Simpan
+            <button type="submit" class="bg-[#003366] text-white py-2 px-4 hover:bg-[#014991] rounded-sm transition-all ml-2 text-sm font-semibold">
+                Kirim Tugas
             </button>
         </div>
     </form>

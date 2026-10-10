@@ -31,7 +31,7 @@ class AuthController extends Controller
                 return redirect()->route('dealers.index');
             }
 
-            return redirect()->route('dealers.index');
+            return redirect()->route('task-submissions.index');
         }
 
         return back()->withErrors([
