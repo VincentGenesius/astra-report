@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Supervisor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Task\StoreRequest;
+use App\Http\Requests\Task\UpdateRequest;
 use App\Models\Area;
 use App\Models\Department;
 use App\Models\Task;
@@ -83,10 +84,10 @@ class TaskController extends Controller
         return redirect()->route('tasks.index');
     }
 
-    // public function destroy(Department $department)
-    // {
-    //     $department->delete();
+    public function destroy(Task $task)
+    {
+        $task->delete();
 
-    //     return redirect()->route('departments.index');
-    // }
+        return redirect()->route('tasks.index');
+    }
 }
